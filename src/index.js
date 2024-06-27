@@ -1,1 +1,1 @@
-console.log('Hola Hazael');
+import './cargarCategorias';
