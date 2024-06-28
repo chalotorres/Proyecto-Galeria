@@ -473,11 +473,20 @@ var dataCategorias = {
 	],
 };
 
-const {categorias} = dataCategorias;
-const contenedorCategorias = document.getElementById('categorias');
+// Se importan los datos de la "base de datos" para las categorías
 
+// Se obtiene el array de categorías dentro de dataCategorías
+const {categorias} = dataCategorias;
+
+// Se obtiene el elemento que contiene el id 'categorías' el cual es el div que contiene las diversas cards
+const contenedorCategorias$1 = document.getElementById('categorias');
+
+// para cada categoría dentro del array de categorías
 categorias.forEach((categoria) => {
+    // Se creará un elemento etiqueta 'a'
     const nuevaCategoria = document.createElement('a');
+    
+    // código html que se incrustrará a la etiqueta creada previamente
     const plantilla = `
         <img class="categoria__img" src="${categoria.imagenPortada}" alt="" />
         <div class="categoria__datos">
@@ -485,11 +494,36 @@ categorias.forEach((categoria) => {
             <p class="categoria__numero-fotos">${categoria.numeroFotos} fotos</p>
         </div>
     `;
+    // Se le asigna el código anterior a la etiqueta 'a' creada previamente
     nuevaCategoria.innerHTML = plantilla;
 
+    // a la etiqueta se le agrega la clase 'categoria'
     nuevaCategoria.classList.add('categoria');
+    // se le da un href a la misma página
     nuevaCategoria.href = '#';
+    // se le da un atributo personalizado
     nuevaCategoria.dataset.categoria = categoria.id;
 
-    contenedorCategorias.append(nuevaCategoria);
+    // al contenedor de categorías se le agrega el elemento "nuevaCategoría" el cual fue creado previamente
+    contenedorCategorias$1.append(nuevaCategoria);
+});
+
+// Obtiene el elemento con id 'categorias' que son las cards
+const contenedorCategorias = document.getElementById('categorias');
+
+// Obtiene el elemento con id 'galeria' que es el modal que contiene las imágenes de cada categoria
+const galeria = document.getElementById('galeria');
+
+// Se le agrega un evento al contenedor de Categorías, con un click
+contenedorCategorias.addEventListener('click', (e) => {
+    // Evita el href = '#' que hace que la página suba cuando se le hace click
+    e.preventDefault();
+    
+    // si el elemento mas cerca al que se le hizo click dentro del contenedor de categorías es una etiqueta 'a'
+    if(e.target.closest('a')) {
+        // al elemento galería se le agrega la clase 'galeria--active' que lo muestra en pantalla
+        galeria.classList.add('galeria--active');
+        // evita que salga el scrollbar dentro del modal de la galería
+        document.body.style.overflow = 'hidden';
+    }   
 });
