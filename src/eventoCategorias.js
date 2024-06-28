@@ -1,3 +1,6 @@
+// Se importan las fotos de la "base de datos"
+import dataFotos from './datos/fotos';
+
 // Obtiene el elemento con id 'categorias' que son las cards
 const contenedorCategorias = document.getElementById('categorias');
 
@@ -15,5 +18,25 @@ contenedorCategorias.addEventListener('click', (e) => {
         galeria.classList.add('galeria--active');
         // evita que salga el scrollbar dentro del modal de la galería
         document.body.style.overflow = 'hidden';
+
+        // Se obtiene la categoría exacta a la que se le dio click
+        const categoriaActiva = e.target.dataset.categoria;
+        // Se obtiene la lista de fotos de la categoría a la que se le dio click
+        const fotos = dataFotos.fotos[categoriaActiva];
+
+        fotos.forEach(foto => {
+            // Se crea el slide plantilla de la foto que contiene el código html
+            const slide = `
+                <a href="#" class="galeria__carousel-slide">
+                    <img class="galeria__carousel-image" src="${foto.ruta}" alt="" />
+                </a>
+            `;
+            // Se agrega a al elemento que contiene la clase "galeria__carousel-slides" el código anterior
+            // por cada elemento dentro de 'fotos'
+            galeria.querySelector('.galeria__carousel-slides').innerHTML += slide;
+        });
+        // Se le agrega la clase 'galeria__carousel-slides--active' el cual agrega un borde a la imagen seleccionada
+        // dentro del carousel
+        galeria.querySelector('.galeria__carousel-slides').classList.add('galeria__carousel-slides--active');
     }   
 });
