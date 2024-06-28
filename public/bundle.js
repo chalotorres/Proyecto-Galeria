@@ -529,11 +529,16 @@ contenedorCategorias.addEventListener('click', (e) => {
         document.body.style.overflow = 'hidden';
 
         // Se obtiene la categoría exacta a la que se le dio click
-        const categoriaActiva = e.target.dataset.categoria;
+        const categoriaActiva = e.target.closest('a').dataset.categoria;
         // Se obtiene la lista de fotos de la categoría a la que se le dio click
         const fotos = dataFotos.fotos[categoriaActiva];
+        // Se obtiene el carousel
+        const carousel = galeria$2.querySelector('.galeria__carousel-slides');
 
-        fotos.forEach(foto => {
+        // Se limpia todo el contenido para no sobrecargarlo de imagenes
+        carousel.innerHTML = '';
+
+        fotos.forEach((foto) => {
             // Se crea el slide plantilla de la foto que contiene el código html
             const slide = `
                 <a href="#" class="galeria__carousel-slide">
