@@ -514,7 +514,7 @@ categorias.forEach((categoria) => {
 const contenedorCategorias = document.getElementById('categorias');
 
 // Obtiene el elemento con id 'galeria' que es el modal que contiene las imágenes de cada categoria
-const galeria = document.getElementById('galeria');
+const galeria$2 = document.getElementById('galeria');
 
 // Se le agrega un evento al contenedor de Categorías, con un click
 contenedorCategorias.addEventListener('click', (e) => {
@@ -524,7 +524,7 @@ contenedorCategorias.addEventListener('click', (e) => {
     // si el elemento mas cerca al que se le hizo click dentro del contenedor de categorías es una etiqueta 'a'
     if(e.target.closest('a')) {
         // al elemento galería se le agrega la clase 'galeria--active' que lo muestra en pantalla
-        galeria.classList.add('galeria--active');
+        galeria$2.classList.add('galeria--active');
         // evita que salga el scrollbar dentro del modal de la galería
         document.body.style.overflow = 'hidden';
 
@@ -542,10 +542,39 @@ contenedorCategorias.addEventListener('click', (e) => {
             `;
             // Se agrega a al elemento que contiene la clase "galeria__carousel-slides" el código anterior
             // por cada elemento dentro de 'fotos'
-            galeria.querySelector('.galeria__carousel-slides').innerHTML += slide;
+            galeria$2.querySelector('.galeria__carousel-slides').innerHTML += slide;
         });
         // Se le agrega la clase 'galeria__carousel-slides--active' el cual agrega un borde a la imagen seleccionada
         // dentro del carousel
-        galeria.querySelector('.galeria__carousel-slides').classList.add('galeria__carousel-slides--active');
+        galeria$2.querySelector('.galeria__carousel-slides').classList.add('galeria__carousel-slides--active');
     }   
+});
+
+// Se obtiene el elemento con tiene la clase 'galeria'
+const galeria$1 = document.getElementById('galeria');
+
+// Función para cerrar galeria
+const cerrarGaleria = () => {
+    galeria$1.classList.remove('galeria--active');
+};
+
+// Se importa la función de cerrar galeria
+
+// Se obtiene el elemento con tiene la clase 'galeria'
+const galeria = document.getElementById('galeria');
+
+// Se agrega el evento click a la galeria
+galeria.addEventListener('click', (e) => {
+    // Se obtiene y almacena el boton mas cerca al elemento al que se le dio click
+    const boton = e.target.closest('button');
+
+    // si existe un botón que tiene un dataset y ese dataset tiene la propiedad 
+    // accion el cual es igual a 'cerrar-galeria'?
+    if(boton?.dataset?.accion === 'cerrar-galeria'){
+        // Se llama a la función cerrar galería
+        cerrarGaleria();
+
+        // Se le agrega el scrollbar que se le había quitado antes
+        document.body.style.overflow = '';
+    }
 });
