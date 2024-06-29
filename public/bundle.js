@@ -508,6 +508,8 @@ categorias.forEach((categoria) => {
     contenedorCategorias$1.append(nuevaCategoria);
 });
 
+// Se importa el dataset de fotos
+
 // Se obtiene el elemento con tiene la clase 'galeria'
 const galeria$3 = document.getElementById('galeria');
 
@@ -521,6 +523,31 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
     galeria$3.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
     // Se le pasa el id a la imagen pero no se muestra
     galeria$3.querySelector('.galeria__imagen').dataset.idImagen = id;
+
+    // Se obitene la categoria actual que se muestra en el modal
+    const categoriaActual = galeria$3.dataset.categoria;
+    // Se obtiene el conjunto de fotos de la categoría actual
+    const fotos = datos.fotos[categoriaActual];
+    // Variable para almacenar el index de la imagen actual dentro de la categoría actual
+    let indexImagenActual;
+
+    // Para cada fotos dentro del conjunto de fotos
+    fotos.forEach((foto, index) => {
+        // Si se encuentra con el mismo id
+        if(foto.id == id) {
+            // Se almacena el index de esa imagen
+            indexImagenActual = index;
+        }
+    });
+
+    // Si los slides tiene una cantidad mayor a 0
+    if(galeria$3.querySelectorAll('.galeria__carousel-slide').length > 0) {
+        // Primero se elimina el contorno resaltante anterior 
+        galeria$3.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
+        
+        // Se le agrega el contorno que resalta la imagen seleccionada
+        galeria$3.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
+    }
 };
 
 // Se importan las fotos de la "base de datos"
@@ -557,7 +584,6 @@ contenedorCategorias.addEventListener('click', (e) => {
         // // Se llama a la función para cargar la imagen
 		cargarImagen(id, nombre, ruta, descripcion);
 
-
         // Se limpia todo el contenido para no sobrecargarlo de imagenes
         carousel.innerHTML = '';
 
@@ -574,7 +600,7 @@ contenedorCategorias.addEventListener('click', (e) => {
         });
         // Se le agrega la clase 'galeria__carousel-slides--active' el cual agrega un borde a la imagen seleccionada
         // dentro del carousel
-        galeria$2.querySelector('.galeria__carousel-slides').classList.add('galeria__carousel-slides--active');
+        galeria$2.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
     }   
 });
 
@@ -589,6 +615,7 @@ const cerrarGaleria = () => {
 // Se importan las fotos de la "base de datos"
 
 const clickSlide = (e) => {
+    // Variables de datos para la foto que se le da click 
     let ruta, nombre, descripcion;
     
     // Se obtiene el id de la imagen a la que se le dio click del slide
@@ -600,14 +627,17 @@ const clickSlide = (e) => {
     // Se obtiene la categoría de la imagen a la que se le dio click del slide
     const categoriaActiva = galeria.dataset.categoria;
 
+    // Se busca dentro de todas las imganes dentro de la categoría activa
     datos.fotos[categoriaActiva].forEach((foto) => {
+        // Si encuentra la foto con el mismo id que la foto a la que se le dio click
         if(foto.id == id) {
+            // Se guardan todos los datos
             ruta = foto.ruta;
             nombre = foto.nombre;
             descripcion = foto.descripcion;
         }
     });
-
+    // Se carga la imagen a la que se le dio click
     cargarImagen(id, nombre, ruta, descripcion);
 };
 

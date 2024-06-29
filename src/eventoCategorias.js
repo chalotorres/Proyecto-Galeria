@@ -35,7 +35,6 @@ contenedorCategorias.addEventListener('click', (e) => {
         // // Se llama a la función para cargar la imagen
 		cargarImagen(id, nombre, ruta, descripcion);
 
-
         // Se limpia todo el contenido para no sobrecargarlo de imagenes
         carousel.innerHTML = '';
 
@@ -52,6 +51,6 @@ contenedorCategorias.addEventListener('click', (e) => {
         });
         // Se le agrega la clase 'galeria__carousel-slides--active' el cual agrega un borde a la imagen seleccionada
         // dentro del carousel
-        galeria.querySelector('.galeria__carousel-slides').classList.add('galeria__carousel-slides--active');
+        galeria.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
     }   
 });
