@@ -1,6 +1,6 @@
 'use strict';
 
-var dataFotos = {
+var datos = {
 	fotos: {
 		america: [
 			{
@@ -430,7 +430,7 @@ var dataFotos = {
 	},
 };
 
-const { fotos } = dataFotos;
+const { fotos } = datos;
 
 var dataCategorias = {
 	categorias: [
@@ -545,8 +545,10 @@ contenedorCategorias.addEventListener('click', (e) => {
         
         // Se obtiene la categoría exacta a la que se le dio click
         const categoriaActiva = e.target.closest('a').dataset.categoria;
+        // se le agrega un elemento personalizado a categoria el cual nos indica cual es la categoría activa
+        galeria$2.dataset.categoria = categoriaActiva;
         // Se obtiene la lista de fotos de la categoría a la que se le dio click
-        const fotos = dataFotos.fotos[categoriaActiva];
+        const fotos = datos.fotos[categoriaActiva];
         // Se obtiene el carousel
         const carousel = galeria$2.querySelector('.galeria__carousel-slides');
         
@@ -563,7 +565,7 @@ contenedorCategorias.addEventListener('click', (e) => {
             // Se crea el slide plantilla de la foto que contiene el código html
             const slide = `
                 <a href="#" class="galeria__carousel-slide">
-                    <img class="galeria__carousel-image" src="${foto.ruta}" alt="" />
+                    <img class="galeria__carousel-image" src="${foto.ruta}" data-id="${foto.id}" alt="" />
                 </a>
             `;
             // Se agrega a al elemento que contiene la clase "galeria__carousel-slides" el código anterior
@@ -584,6 +586,31 @@ const cerrarGaleria = () => {
     galeria$1.classList.remove('galeria--active');
 };
 
+// Se importan las fotos de la "base de datos"
+
+const clickSlide = (e) => {
+    let ruta, nombre, descripcion;
+    
+    // Se obtiene el id de la imagen a la que se le dio click del slide
+    const id = e.target.dataset.id;
+    
+    // Se obtiene el elemento con tiene la clase 'galeria'
+    const galeria = document.getElementById('galeria');
+    
+    // Se obtiene la categoría de la imagen a la que se le dio click del slide
+    const categoriaActiva = galeria.dataset.categoria;
+
+    datos.fotos[categoriaActiva].forEach((foto) => {
+        if(foto.id == id) {
+            ruta = foto.ruta;
+            nombre = foto.nombre;
+            descripcion = foto.descripcion;
+        }
+    });
+
+    cargarImagen(id, nombre, ruta, descripcion);
+};
+
 // Se importa la función de cerrar galeria
 
 // Se obtiene el elemento con tiene la clase 'galeria'
@@ -602,5 +629,12 @@ galeria.addEventListener('click', (e) => {
 
         // Se le agrega el scrollbar que se le había quitado antes
         document.body.style.overflow = '';
+    }
+
+    // -- Slide click de carousel --
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'id'
+    if(e.target.dataset.id) {
+        // Se llama a la función de click en el slide
+        clickSlide(e);
     }
 });

@@ -23,6 +23,8 @@ contenedorCategorias.addEventListener('click', (e) => {
         
         // Se obtiene la categoría exacta a la que se le dio click
         const categoriaActiva = e.target.closest('a').dataset.categoria;
+        // se le agrega un elemento personalizado a categoria el cual nos indica cual es la categoría activa
+        galeria.dataset.categoria = categoriaActiva;
         // Se obtiene la lista de fotos de la categoría a la que se le dio click
         const fotos = dataFotos.fotos[categoriaActiva];
         // Se obtiene el carousel
@@ -41,7 +43,7 @@ contenedorCategorias.addEventListener('click', (e) => {
             // Se crea el slide plantilla de la foto que contiene el código html
             const slide = `
                 <a href="#" class="galeria__carousel-slide">
-                    <img class="galeria__carousel-image" src="${foto.ruta}" alt="" />
+                    <img class="galeria__carousel-image" src="${foto.ruta}" data-id="${foto.id}" alt="" />
                 </a>
             `;
             // Se agrega a al elemento que contiene la clase "galeria__carousel-slides" el código anterior

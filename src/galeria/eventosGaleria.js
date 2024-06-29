@@ -1,5 +1,7 @@
 // Se importa la función de cerrar galeria
 import cerrarGaleria from "./cerrarGaleria";
+// Se importa la función dar click en el slide
+import clickSlide from "./clickSlide";
 
 // Se obtiene el elemento con tiene la clase 'galeria'
 const galeria = document.getElementById('galeria');
@@ -17,5 +19,12 @@ galeria.addEventListener('click', (e) => {
 
         // Se le agrega el scrollbar que se le había quitado antes
         document.body.style.overflow = '';
+    }
+
+    // -- Slide click de carousel --
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'id'
+    if(e.target.dataset.id) {
+        // Se llama a la función de click en el slide
+        clickSlide(e);
     }
 });
