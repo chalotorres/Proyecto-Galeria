@@ -508,6 +508,21 @@ categorias.forEach((categoria) => {
     contenedorCategorias$1.append(nuevaCategoria);
 });
 
+// Se obtiene el elemento con tiene la clase 'galeria'
+const galeria$3 = document.getElementById('galeria');
+
+// Función para cargar imagen
+const cargarImagen = (id, nombre, ruta, descripcion) => {   
+    // Se actualiza la ruta de la primer imagen
+    galeria$3.querySelector('.galeria__imagen').src = ruta;
+    // Se le pone el nombre de la foto en el front con innerText
+    galeria$3.querySelector('.galeria__titulo').innerText = nombre;
+    // Se le agrega la descripción al pie de la imagen
+    galeria$3.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
+    // Se le pasa el id a la imagen pero no se muestra
+    galeria$3.querySelector('.galeria__imagen').dataset.idImagen = id;
+};
+
 // Se importan las fotos de la "base de datos"
 
 // Obtiene el elemento con id 'categorias' que son las cards
@@ -527,13 +542,19 @@ contenedorCategorias.addEventListener('click', (e) => {
         galeria$2.classList.add('galeria--active');
         // evita que salga el scrollbar dentro del modal de la galería
         document.body.style.overflow = 'hidden';
-
+        
         // Se obtiene la categoría exacta a la que se le dio click
         const categoriaActiva = e.target.closest('a').dataset.categoria;
         // Se obtiene la lista de fotos de la categoría a la que se le dio click
         const fotos = dataFotos.fotos[categoriaActiva];
         // Se obtiene el carousel
         const carousel = galeria$2.querySelector('.galeria__carousel-slides');
+        
+        // Se obtiene los datos de las primer foto según la categoría a la que se le dió click
+        const { id, nombre, ruta, descripcion } = fotos[0];
+        // // Se llama a la función para cargar la imagen
+		cargarImagen(id, nombre, ruta, descripcion);
+
 
         // Se limpia todo el contenido para no sobrecargarlo de imagenes
         carousel.innerHTML = '';
