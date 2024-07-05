@@ -1,8 +1,5 @@
-# Proyecto Galería :tw-1f4f7:
-
+# Proyecto Galería
 Proyecto web que muestra una serie de imágenes divididas en catálogos según su contenido. Además, incluye una previsualización del contenido de cada sección al ser seleccionada y un carrusel interactivo con las imágenes contenidas en dicha sección.
-
-![Captura de la galería](img/ReadMe 1.png)
 
 ## Tabla de Contenidos
 
@@ -15,8 +12,6 @@ Proyecto web que muestra una serie de imágenes divididas en catálogos según s
 ## Descripción
 
 El proyecto consiste en una galería de imágenes que funciona como un mini portafolio. Las imágenes están organizadas en catálogos temáticos, permitiendo una fácil navegación y visualización. Esta galería interactiva fue adaptada de un ejercicio del curso "JavaScript: El Curso Completo, Práctico y desde Cero". Originalmente, la funcionalidad dividía las imágenes por continentes, pero se modificó para mostrar evidencia de proyectos propios realizados en Figma y de proyectos hechos en Photoshop durante cursos en el Centro Universitario de las Artes (CUART).
-
-![Captura del carrusel](img/ReadMe 2.png)
 
 ## Tecnologías Utilizadas
 
