@@ -96,7 +96,7 @@ var datos = {
 				nombre: 'Antártida 4',
 				descripcion:
 					'Antártida 4 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id enim ac diam consectetur vulputate eget in magna. Sed fermentum, sapien nec vulputate bibendum, urna neque eleifend leo, at porta diam risus non ligula. Nulla ac venenatis augue. Morbi lobortis libero sit amet justo cursus, iaculis ultricies sapien lacinia.',
-				ruta: './img/antartida/4.png',
+				ruta: './img/cine/4.png',
 			},
 			{
 				id: 64,
@@ -198,7 +198,7 @@ var datos = {
 				nombre: 'Ilustración 3',
 				descripcion:
 					'Ilustración 3 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id enim ac diam consectetur vulputate eget in magna. Sed fermentum, sapien nec vulputate bibendum, urna neque eleifend leo, at porta diam risus non ligula. Nulla ac venenatis augue. Morbi lobortis libero sit amet justo cursus, iaculis ultricies sapien lacinia.',
-				ruta: './img/lustracion/4.png',
+				ruta: './img/ilustracion/4.png',
 			},
 			{
 				id: 78,
@@ -470,21 +470,21 @@ categorias.forEach((categoria) => {
 // Se importa el dataset de fotos
 
 // Se obtiene el elemento con tiene la clase 'galeria'
-const galeria$3 = document.getElementById('galeria');
+const galeria$4 = document.getElementById('galeria');
 
 // Función para cargar imagen
 const cargarImagen = (id, nombre, ruta, descripcion) => {   
     // Se actualiza la ruta de la primer imagen
-    galeria$3.querySelector('.galeria__imagen').src = ruta;
+    galeria$4.querySelector('.galeria__imagen').src = ruta;
     // Se le pone el nombre de la foto en el front con innerText
-    galeria$3.querySelector('.galeria__titulo').innerText = nombre;
+    galeria$4.querySelector('.galeria__titulo').innerText = nombre;
     // Se le agrega la descripción al pie de la imagen
-    galeria$3.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
+    galeria$4.querySelector('.galeria__descripcion-imagen-activa').innerText = descripcion;
     // Se le pasa el id a la imagen pero no se muestra
-    galeria$3.querySelector('.galeria__imagen').dataset.idImagen = id;
+    galeria$4.querySelector('.galeria__imagen').dataset.idImagen = id;
 
     // Se obitene la categoria actual que se muestra en el modal
-    const categoriaActual = galeria$3.dataset.categoria;
+    const categoriaActual = galeria$4.dataset.categoria;
     // Se obtiene el conjunto de fotos de la categoría actual
     const fotos = datos.fotos[categoriaActual];
     // Variable para almacenar el index de la imagen actual dentro de la categoría actual
@@ -500,22 +500,22 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
     });
 
     // Si los slides tiene una cantidad mayor a 0
-    if(galeria$3.querySelectorAll('.galeria__carousel-slide').length > 0) {
+    if(galeria$4.querySelectorAll('.galeria__carousel-slide').length > 0) {
         // Primero se elimina el contorno resaltante anterior 
-        galeria$3.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
+        galeria$4.querySelector('.galeria__carousel-slide--active').classList.remove('galeria__carousel-slide--active');
         
         // Se le agrega el contorno que resalta la imagen seleccionada
-        galeria$3.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
+        galeria$4.querySelectorAll('.galeria__carousel-slide')[indexImagenActual].classList.add('galeria__carousel-slide--active');
     }
 };
 
 const cargarAnteriorSiguiente = (direccion) => {
     // Variable que obtiene la categoria a la que se le dio click
-    const categoriaActual = galeria$3.dataset.categoria;
+    const categoriaActual = galeria$4.dataset.categoria;
     // Se obtiene el set de imagenes de esa categoria
     const fotos = datos.fotos[categoriaActual];
     // se obtiene el id de la imagen actual
-    const idImagenActual = galeria$3.querySelector('.galeria__imagen').dataset.idImagen;
+    const idImagenActual = galeria$4.querySelector('.galeria__imagen').dataset.idImagen;
 
     // Variable que obtendrá el index de la imagen
     let indexImagenActual;
@@ -550,28 +550,28 @@ const cargarAnteriorSiguiente = (direccion) => {
 const contenedorCategorias = document.getElementById('categorias');
 
 // Obtiene el elemento con id 'galeria' que es el modal que contiene las imágenes de cada categoria
-const galeria$2 = document.getElementById('galeria');
+const galeria$3 = document.getElementById('galeria');
 
 // Se le agrega un evento al contenedor de Categorías, con un click
 contenedorCategorias.addEventListener('click', (e) => {
     // Evita el href = '#' que hace que la página suba cuando se le hace click
     e.preventDefault();
-    
+
     // si el elemento mas cerca al que se le hizo click dentro del contenedor de categorías es una etiqueta 'a'
     if(e.target.closest('a')) {
         // al elemento galería se le agrega la clase 'galeria--active' que lo muestra en pantalla
-        galeria$2.classList.add('galeria--active');
+        galeria$3.classList.add('galeria--active');
         // evita que salga el scrollbar dentro del modal de la galería
         document.body.style.overflow = 'hidden';
         
         // Se obtiene la categoría exacta a la que se le dio click
         const categoriaActiva = e.target.closest('a').dataset.categoria;
         // se le agrega un elemento personalizado a categoria el cual nos indica cual es la categoría activa
-        galeria$2.dataset.categoria = categoriaActiva;
+        galeria$3.dataset.categoria = categoriaActiva;
         // Se obtiene la lista de fotos de la categoría a la que se le dio click
         const fotos = datos.fotos[categoriaActiva];
         // Se obtiene el carousel
-        const carousel = galeria$2.querySelector('.galeria__carousel-slides');
+        const carousel = galeria$3.querySelector('.galeria__carousel-slides');
         
         // Se obtiene los datos de las primer foto según la categoría a la que se le dió click
         const { id, nombre, ruta, descripcion } = fotos[0];
@@ -590,13 +590,94 @@ contenedorCategorias.addEventListener('click', (e) => {
             `;
             // Se agrega a al elemento que contiene la clase "galeria__carousel-slides" el código anterior
             // por cada elemento dentro de 'fotos'
-            galeria$2.querySelector('.galeria__carousel-slides').innerHTML += slide;
+            galeria$3.querySelector('.galeria__carousel-slides').innerHTML += slide;
         });
         // Se le agrega la clase 'galeria__carousel-slides--active' el cual agrega un borde a la imagen seleccionada
         // dentro del carousel
-        galeria$2.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
+        galeria$3.querySelector('.galeria__carousel-slide').classList.add('galeria__carousel-slide--active');
     }   
 });
+
+// Se obtiene el elemento galeria
+const galeria$2 = document.getElementById('galeria');
+
+// Función de carousel
+const carousel = (direccion) => {
+    // Parámetros que queremos que tenga el observer 
+    const opciones = {
+        // La raíz donde empezará a observar será el elemento con la clase galeria__carousel
+        root: document.querySelector('.galeria__carousel'),
+        // un margen de 0px
+        rootMargin: '0px',
+        // solo si el 90% es observado
+        threshold: 0.9,
+    };
+
+    // La variable observador del viewport
+    const observer = new IntersectionObserver((entradas) => {
+        // Arreglo de slides visibles dentro de entradas
+        const slidesVisibles = entradas.filter((entrada) => {
+            // Si la entrada n es verdadera (si está observada)
+            if(entrada.isIntersecting === true) {
+                // returna esa entrada a la lista
+                return entrada;
+            }
+        });
+        
+        // Si se oprimió para atrás
+        if(direccion === 'atras') {
+            // Se obtiene el primer slide visible del carousel
+            const primerSlideVisible = slidesVisibles[0];
+            // Se obtiene el index del ultimo slide visible
+            const indexPrimerSlideVisible = entradas.indexOf(primerSlideVisible);
+
+            // Si la cantidad de enrtadas que hay menos uno es mayor que el ultimo slide visible
+            if(indexPrimerSlideVisible >= 1) {
+                // Se hace un scroll con la función scrollIntoView
+                entradas[indexPrimerSlideVisible - 1].target.scrollIntoView({
+                    // transición suave
+                    behavior: 'smooth',
+                    // El primer elemento lo pone al final
+                    inline: 'end',  
+                });
+            }
+        }
+        // Si se oprimió para adelante 
+        else if (direccion === 'adelante') {
+            // Se obtiene el ultimo slide visible
+            const ultimoSlideVisible = slidesVisibles[slidesVisibles.length - 1];
+            // Se obtiene el index del ultimo slide visible
+            const indexUltimoSlideVisible = entradas.indexOf(ultimoSlideVisible);
+
+            // Si la cantidad de enrtadas que hay menos uno es mayor que el ultimo slide visible
+            if(entradas.length - 1 > indexUltimoSlideVisible) {
+                // Se hace un scroll con la función scrollIntoView
+                entradas[indexUltimoSlideVisible + 1].target.scrollIntoView({
+                    // transición suave
+                    behavior: 'smooth',
+                    // El último elemento lo pone al inicio
+                    inline: 'start',
+                });
+            }
+        }
+
+        // Se obtiene la listas de elementos de slides
+        const slides = galeria$2.querySelectorAll('.galeria__carousel-slide');
+        // Para cada slide
+        slides.forEach((slide) => {
+            // el elemento observer observará las slide
+            observer.unobserve(slide);
+        });
+    }, opciones);
+    
+    // Se obtiene la listas de elementos de slides
+    const slides = galeria$2.querySelectorAll('.galeria__carousel-slide');
+    // Para cada slide
+    slides.forEach((slide) => {
+        // el elemento observer observará las slide
+        observer.observe(slide);
+    });
+};
 
 // Se obtiene el elemento con tiene la clase 'galeria'
 const galeria$1 = document.getElementById('galeria');
@@ -672,5 +753,17 @@ galeria.addEventListener('click', (e) => {
     // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a anterior-imagen
     if(boton?.dataset?.accion === 'anterior-imagen') {
         cargarAnteriorSiguiente('anterior');
+    }
+
+    // -- Carousel adelante
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a siguiente-imagen
+    if(boton?.dataset?.accion === 'siguiente-slide') {
+        carousel('adelante');
+    }
+
+    // -- Carousel atrás
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a anterior-imagen
+    if(boton?.dataset?.accion === 'anterior-slide') {
+        carousel('atras');
     }
 });

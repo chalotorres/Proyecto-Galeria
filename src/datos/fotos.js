@@ -94,7 +94,7 @@ export default {
 				nombre: 'Antártida 4',
 				descripcion:
 					'Antártida 4 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id enim ac diam consectetur vulputate eget in magna. Sed fermentum, sapien nec vulputate bibendum, urna neque eleifend leo, at porta diam risus non ligula. Nulla ac venenatis augue. Morbi lobortis libero sit amet justo cursus, iaculis ultricies sapien lacinia.',
-				ruta: './img/antartida/4.png',
+				ruta: './img/cine/4.png',
 			},
 			{
 				id: 64,
@@ -196,7 +196,7 @@ export default {
 				nombre: 'Ilustración 3',
 				descripcion:
 					'Ilustración 3 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id enim ac diam consectetur vulputate eget in magna. Sed fermentum, sapien nec vulputate bibendum, urna neque eleifend leo, at porta diam risus non ligula. Nulla ac venenatis augue. Morbi lobortis libero sit amet justo cursus, iaculis ultricies sapien lacinia.',
-				ruta: './img/lustracion/4.png',
+				ruta: './img/ilustracion/4.png',
 			},
 			{
 				id: 78,
