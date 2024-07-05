@@ -1,4 +1,5 @@
 // Se importa la función de cerrar galeria
+import { cargarAnteriorSiguiente } from "./cargarImagen";
 import cerrarGaleria from "./cerrarGaleria";
 // Se importa la función dar click en el slide
 import clickSlide from "./clickSlide";
@@ -26,5 +27,17 @@ galeria.addEventListener('click', (e) => {
     if(e.target.dataset.id) {
         // Se llama a la función de click en el slide
         clickSlide(e);
+    }
+
+    // -- Siguiente imagen
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a siguiente-imagen
+    if(boton?.dataset?.accion === 'siguiente-imagen') {
+        cargarAnteriorSiguiente('siguiente');
+    }
+
+    // -- Anterior imagen
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a anterior-imagen
+    if(boton?.dataset?.accion === 'anterior-imagen') {
+        cargarAnteriorSiguiente('anterior');
     }
 });

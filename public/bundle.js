@@ -509,6 +509,41 @@ const cargarImagen = (id, nombre, ruta, descripcion) => {
     }
 };
 
+const cargarAnteriorSiguiente = (direccion) => {
+    // Variable que obtiene la categoria a la que se le dio click
+    const categoriaActual = galeria$3.dataset.categoria;
+    // Se obtiene el set de imagenes de esa categoria
+    const fotos = datos.fotos[categoriaActual];
+    // se obtiene el id de la imagen actual
+    const idImagenActual = galeria$3.querySelector('.galeria__imagen').dataset.idImagen;
+
+    // Variable que obtendrá el index de la imagen
+    let indexImagenActual;
+    // Para cada foto del set de fotos
+    fotos.forEach((foto, index) => {
+        // Si el id de la foto actual del ciclo es igual al id de la foto de actual de la galeria
+        if(foto.id == idImagenActual) {
+            // Se actualiza el index
+            indexImagenActual = index;  
+        }
+    });
+
+    // Si la dirección es siguiente
+    if(direccion === 'siguiente') {
+        if (fotos[indexImagenActual + 1]) {
+            const {id, nombre, ruta, descripcion} = fotos[indexImagenActual + 1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
+    }
+    // Si la dirección es anterior 
+    else if (direccion === 'anterior') {
+        if (fotos[indexImagenActual - 1]) {
+            const {id, nombre, ruta, descripcion} = fotos[indexImagenActual - 1];
+            cargarImagen(id, nombre, ruta, descripcion);
+        }
+    }
+};
+
 // Se importan las fotos de la "base de datos"
 
 // Obtiene el elemento con id 'categorias' que son las cards
@@ -625,5 +660,17 @@ galeria.addEventListener('click', (e) => {
     if(e.target.dataset.id) {
         // Se llama a la función de click en el slide
         clickSlide(e);
+    }
+
+    // -- Siguiente imagen
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a siguiente-imagen
+    if(boton?.dataset?.accion === 'siguiente-imagen') {
+        cargarAnteriorSiguiente('siguiente');
+    }
+
+    // -- Anterior imagen
+    // Si al elemento al que se le dio click tiene un dataset con valor de 'acción' igual a anterior-imagen
+    if(boton?.dataset?.accion === 'anterior-imagen') {
+        cargarAnteriorSiguiente('anterior');
     }
 });
